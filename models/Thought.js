@@ -1,4 +1,25 @@
-const { Schema, Types } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
+
+const reactionsSchema = new Schema({
+  reactionId: {
+    type: Schema.Types.ObjectId,
+    default: () => new Types.ObjectId(),
+  },
+  reactionBody: {
+    type: String,
+    required: true,
+    maxLength: 280,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    get: (timestamp) => dateFormat(timestamp),
+  },
+});
 
 const thoughtsSchema = new Schema(
   {
@@ -27,6 +48,6 @@ const thoughtsSchema = new Schema(
   }
 );
 
-const User = model("User", userSchema);
+const Thought = model("Thought", thoughtsSchema);
 
-module.exports = User;
+module.exports = Thought;

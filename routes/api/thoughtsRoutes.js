@@ -3,16 +3,16 @@ const {
   getThoughts,
   getSingleThought,
   createThought,
-  updateThought,
-  deleteThought,
+  updateThoughts,
+  deleteThoughts,
 } = require("../../controllers/thoughtsController.js");
 
 router.route("/").get(getThoughts).post(createThought);
 
 router
-  .route("/:courseId")
+  .route("/:thoughtId")
   .get(getSingleThought)
-  .put(updateThought)
-  .delete(deleteThought);
+  .put(updateThoughts)
+  .delete(deleteThoughts);
 
 module.exports = router;
