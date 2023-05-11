@@ -1,17 +1,4 @@
-const usernames = [
-  "KittenLover112",
-  "ARSmith",
-  "vo1dfru1t",
-  "hauntingask",
-  "experienceamphora",
-  "covenproceed",
-  "shannonprayer",
-  "jetpartial",
-  "enchantshortcake",
-  "savorslimy",
-  "boomerangwhy",
-  "jodhpursprocessionary",
-];
+const usernames = [];
 
 const thoughts = [
   "Cats are cool",

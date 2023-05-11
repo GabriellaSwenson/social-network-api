@@ -32,7 +32,7 @@ const thoughtsSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (date) => timeSince(date),
+      //get: (date) => timeSince(date),
     },
     username: {
       type: String,

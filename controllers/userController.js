@@ -1,8 +1,8 @@
 const { ObjectId } = require("mongoose").Types;
-const { Student, Course } = require("../models");
-
+//const { User, Thought } = require("../models");
+const User = require("../models/User");
 const headCount = async () =>
-  Users.aggregate()
+  User.aggregate()
     .count("userCount")
     .then((numberOfUsers) => numberOfUsers);
 
@@ -45,40 +45,9 @@ module.exports = {
     User.findOneAndRemove({ _id: req.params.userId }).then((user) =>
       !user
         ? res.status(404).json({ message: "No such user exists" })
-        : Thought.findOneAndUpdate(
-            { user: req.params.userId },
-            { $pull: { users: req.params.usersId } },
-            { new: true }
-          )
+        : ({ user: req.params.userId },
+          { $pull: { users: req.params.usersId } },
+          { new: true })
     );
-  },
-
-  addThought(req, res) {
-    console.log("You are adding a thought");
-    console.log(req.body);
-    User.findOneAndUpdate(
-      { _id: req.params.userId },
-      { $addToSet: { thoughts: req.body } },
-      { runValidators: true, new: true }
-    )
-      .then((user) =>
-        !user
-          ? res.status(404).json({ message: "No user found with that ID :(" })
-          : res.json(user)
-      )
-      .catch((err) => res.status(500).json(err));
-  },
-  removeThought(req, res) {
-    User.findOneAndUpdate(
-      { _id: req.params.userId },
-      { $pull: { thought: { thoughtId: req.params.thoughtId } } },
-      { runValidators: true, new: true }
-    )
-      .then((user) =>
-        !user
-          ? res.status(404).json({ message: "No user found with that ID :(" })
-          : res.json(user)
-      )
-      .catch((err) => res.status(500).json(err));
   },
 };
